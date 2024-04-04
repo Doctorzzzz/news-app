@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "news-app-8f161": {
+      "hosting": {
+        "news-app": [
+          "news-app-8f161"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "news-app-8f161"
+  }
+}

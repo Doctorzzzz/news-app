@@ -88,8 +88,28 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {
+            "version": 2
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "news-app:build:production",
+              "serveTarget": "news-app:serve:production"
+            },
+            "development": {
+              "buildTarget": "news-app:build:development",
+              "serveTarget": "news-app:serve:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }
