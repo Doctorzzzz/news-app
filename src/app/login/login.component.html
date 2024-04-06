@@ -30,28 +30,15 @@
           />
         </svg>
 
-        <h2 class="font-bold text-2xl">SignUp to create your account</h2>
-        <p>Already have an account? <a class="text-purple-800" routerLink="/login">Login</a></p>
+        <h2 class="font-bold text-2xl mb-2">SignIn To Your Account</h2>
+        <p>Don't have an account Yet? <a class="text-purple-800" routerLink="/signup">Sign Up</a></p>
         <div class="mt-10 w-full">
           <form
             class="max-w-md w-full space-y-8"
             [formGroup]="form"
             (ngSubmit)="onSubmit()"
           >
-            <div class="flex flex-col">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-1 ml-1"
-                for="username"
-                >Username:</label
-              >
-              <input
-                class="shadow-lg appearance-none border-1 rounded-md w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="username"
-                type="text"
-                placeholder="Username"
-                formControlName="name"
-              />
-            </div>
+    
             <div class="flex flex-col">
               <label
                 class="block text-gray-700 text-sm font-bold mb-1 ml-1"
@@ -80,27 +67,13 @@
                 formControlName="password"
               />
             </div>
-            <div class="flex flex-col">
-              <label
-                class="block text-gray-700 text-sm font-bold mb-1 ml-1"
-                for="confirm password"
-                >Confirm Password:</label
-              >
-              <input
-                class="shadow-lg appearance-none border-1 rounded-md w-full py-1 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="confirm password"
-                type="password"
-                placeholder="Confirm Password"
-                formControlName="confirmPassword"
-              />
-            </div>
+            
             <div class="flex items-center justify-between gap-4">
               <button
-              [disabled]="form.invalid"
                 class="w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-slate-500 hover:bg-slate-600"
                 type="submit"
               >
-                Sign Up
+                Sign In
               </button>
             </div>
           </form>
@@ -109,3 +82,5 @@
     </div>
   </body>
 </html>
+
+<router-outlet></router-outlet>
