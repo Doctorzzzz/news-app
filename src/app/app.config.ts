@@ -4,8 +4,10 @@ import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getAuth, provideAuth } from '@angular/fire/auth';
+
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { getMessaging, provideMessaging } from '@angular/fire/messaging';
+
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -25,5 +27,6 @@ export const appConfig: ApplicationConfig = {
     importProvidersFrom(provideAuth(() => getAuth())),
     importProvidersFrom(provideFirestore(() => getFirestore())),
     importProvidersFrom(provideMessaging(() => getMessaging())),
+    
   ],
 };
