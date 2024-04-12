@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 
 @Component({
@@ -8,7 +8,14 @@ import { FormGroup } from '@angular/forms';
   templateUrl: './news.component.html',
   styleUrl: './news.component.css'
 })
-export class NewsComponent {
+export class NewsComponent implements OnInit {
   form!:FormGroup
 
+  constructor(){}
+
+
+
+   ngOnInit(): void {
+     
+   }
 }

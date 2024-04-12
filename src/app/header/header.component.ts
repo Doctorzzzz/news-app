@@ -28,13 +28,20 @@ export class HeaderComponent implements OnInit {
       if (user) {
         this.userLoggedIn = true;
         console.log('user is logged in');
-        console.log(this.firebaseAuth.currentUser?.uid)
-      
-        ;
+        console.log(this.firebaseAuth.currentUser);
+       
       } else {
         this.userLoggedIn = false;
         console.log('user is not logged in');
       }
     });
+   
+
+
+
+
+
+
+
   }
 }

@@ -1,5 +1,5 @@
-<div
-  class="flex flex-wrap bg-gray-800 justify-between min-h-11 px-8 items-center"
+<div style="background-color: #202124;"
+  class="flex flex-wrap justify-between min-h-11 px-8 pt-5 pb-1 items-center"
 >
   <div class="flex flex-wrap space-x-6">
     <a routerLink="/news">
@@ -21,7 +21,7 @@
       *ngIf="userLoggedIn"
       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
     >
-      Welcome {{ firebaseAuth.currentUser?.displayName }}
+      Welcome {{ firebaseAuth.currentUser?.displayName }} 
     </p>
     <!-- <a
       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
@@ -31,7 +31,7 @@
     > -->
     <a
       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
-      routerLink="/news"
+      routerLink="/add-news"
       rel="noopener noreferrer"
       >Add News</a
     >

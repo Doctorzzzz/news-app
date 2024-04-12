@@ -31,7 +31,7 @@ export class SignUpComponent implements OnInit {
     
     const rawForm = this.form.getRawValue();
     this.authService
-      .register(rawForm.email, rawForm.username, rawForm.password)
+      .register(rawForm.email, rawForm.name, rawForm.password)
       .subscribe({
         next: () => {
           console.log('Form submitted!', this.form);

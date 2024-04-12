@@ -1,1 +1,96 @@
-<p>add-news works!</p>
+<div class="bg-gray-100">
+  <div class="container mx-auto px-4 py-5">
+    <form
+      [formGroup]="form"
+      (ngSubmit)="onSubmit()"
+      class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
+    >
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="title">
+          Title
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="title"
+          type="text"
+          placeholder="Enter title"
+          formControlName="title"
+        />
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="imagePath"
+        >
+          ImagePath
+        </label>
+        <input
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="imagePath"
+          type="text"
+          placeholder="ImagePath"
+          formControlName="imagePath"
+        />
+      </div>
+       <img src="{{form.value.imagePath}}" alt="">
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="country">
+          Country
+        </label>
+        <select
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="country"
+          formControlName="country"
+        >
+          <option>Select a country</option>
+          <option>United States</option>
+          <option>Canada</option>
+          <option>Mexico</option>
+        </select>
+      </div>
+      <div class="mb-4">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="anotherSelect"
+        >
+          News Related to:
+        </label>
+        <select
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="anotherSelect"
+          formControlName="newstype"
+        >
+          <option>Business</option>
+          <option>Politics</option>
+          <option>Crime</option>
+          <option>Sports</option>
+          <option>Finance</option>
+        </select>
+      </div>
+      <div class="mb-6">
+        <label
+          class="block text-gray-700 text-sm font-bold mb-2"
+          for="textarea"
+        >
+          Description
+        </label>
+        <textarea
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+          id="textarea"
+          rows="5"
+          placeholder="Enter description"
+          formControlName="description"
+        ></textarea>
+      </div>
+      <div class="flex items-center justify-between">
+        <button
+          class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          type="submit"
+          
+        >
+          Submit
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

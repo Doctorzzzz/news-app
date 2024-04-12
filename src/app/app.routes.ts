@@ -3,6 +3,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
+import { AddNewsComponent } from './add-news/add-news.component';
 
 export const routes: Routes = [
     {
@@ -25,5 +26,9 @@ export const routes: Routes = [
       {
         path: 'news',
         component:NewsComponent ,
+      },
+      {
+        path: 'add-news',
+        component:AddNewsComponent ,
       },
 ];
