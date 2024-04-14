@@ -4,6 +4,7 @@ import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { AuthService } from '../auth.service';
 import { Auth } from '@angular/fire/auth';
+import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +17,7 @@ export class HeaderComponent implements OnInit {
   constructor(private auth: AuthService, private Router: Router) {}
 
   firebaseAuth = inject(Auth);
+  firestore=inject(Firestore);
   userLoggedIn = false;
 
   signOut() {
@@ -29,6 +31,7 @@ export class HeaderComponent implements OnInit {
         this.userLoggedIn = true;
         console.log('user is logged in');
         console.log(this.firebaseAuth.currentUser);
+        
        
       } else {
         this.userLoggedIn = false;

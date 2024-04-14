@@ -8,7 +8,7 @@ import { AddNewsComponent } from './add-news/add-news.component';
 export const routes: Routes = [
     {
         path: '',
-        redirectTo:'/home',
+        redirectTo:'/news',
         pathMatch:'full',
       },
       {

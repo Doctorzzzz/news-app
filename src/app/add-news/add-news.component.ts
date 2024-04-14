@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -22,11 +22,13 @@ export class AddNewsComponent implements OnInit {
   firebaseAuth = inject(Auth);
   currentUserUid: string | undefined;
 
-  constructor(private auth: AuthService) {}
+  constructor(private auth: AuthService,private router:Router) {}
   form!: FormGroup;
+ 
 
   onSubmit() {
     console.log('addNews called()');
+    
     // Below function will add the news to firestore
     const rawForm = this.form.getRawValue();
     this.auth
@@ -51,13 +53,17 @@ export class AddNewsComponent implements OnInit {
             Description: rawForm.description,
             CountryOfOrigin: rawForm.country,
             TypeOfNews: rawForm.newstype,
+            authorName: this.firebaseAuth.currentUser?.displayName,
+            dateTimeCreated:new Date()
           }
-        );
+        ).then(()=>{ this.form.reset();
+          this.router.navigateByUrl("/news")
+        });
         console.log(' news added successfully at ' + dbInstance);
         console.log(' news added successfully at ' + dbInstance1);
       });
 
-    this.form.reset;
+   
   }
 
   ngOnInit(): void {
