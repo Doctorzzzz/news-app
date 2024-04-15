@@ -1,4 +1,4 @@
-import { NgIf } from '@angular/common';
+import { NgIf, UpperCasePipe } from '@angular/common';
 import { Component, Inject, OnInit, inject } from '@angular/core';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
@@ -9,7 +9,7 @@ import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, NgIf, LoginComponent],
+  imports: [RouterLink, RouterOutlet, NgIf, LoginComponent,UpperCasePipe],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })

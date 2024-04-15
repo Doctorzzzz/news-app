@@ -6,7 +6,7 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from '@angular/fire/auth';
-import {  Firestore, addDoc, collection, collectionData, getDocs, query, where } from '@angular/fire/firestore';
+import {  Firestore, addDoc, collection, getDocs, query, where } from '@angular/fire/firestore';
 
 import { Observable, from,  } from 'rxjs';
 
@@ -83,6 +83,7 @@ export class AuthService implements OnInit {
        return null;
     }
    }
+
 
   
    

@@ -3,7 +3,7 @@
     <div
       *ngFor="let item of news"
       style="background-color: #1f1f1f"
-      class="flex flex-col text-yellow-50 items-start w-1/2 min-h-96  px-6 py-3 border-0 shadow-md rounded-2xl ml-40 mb-10"
+      class="flex flex-col text-yellow-50 items-start w-1/2 min-h-96 px-6 py-3 border-0 shadow-md rounded-2xl ml-40 mb-10"
     >
       <div class="flex flex-row justify-between w-full">
         <div class="flex">
@@ -21,14 +21,19 @@
               d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
             />
           </svg>
-          <h1 class="text-sm font-bold tracking-wider text-white">
+          <h1
+            id="header"
+            [attr.contenteditable]="isEditMode ? '' : null"
+            class="text-sm font-bold tracking-wider text-white"
+            [class.edit-mode]="isEditMode"
+          >
             {{ item.TypeOfNews | uppercase }}
           </h1>
         </div>
-      <div>{{item.dateTimeCreated.toDate() | date}}</div>
+        <div>{{ item.dateTimeCreated.toDate() | date }}</div>
       </div>
       <div class="flex flex-row py-6">
-        <div class="flex flex-col min-w-72 max-w-72 ">
+        <div class="flex flex-col min-w-72 max-w-72">
           <img
             class="border-0 rounded-xl w-64 h-52"
             src="{{ item.imagePath }}"
@@ -54,12 +59,18 @@
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
               />
             </svg>
-            <h1 class="mb-6 text-sm font-bold tracking-wider text-white">
+            <h1
+              [attr.contenteditable]="isEditMode ? '' : null"
+              class="mb-6 text-sm font-bold tracking-wider text-white"
+            >
               {{ item.CountryOfOrigin | uppercase }}
             </h1>
           </div>
 
-          <h1 class="text-slate-50 font-normal text-lg">
+          <h1
+            [attr.contenteditable]="isEditMode ? '' : null"
+            class="text-slate-50 font-normal text-lg"
+          >
             {{ item.Title }}
           </h1>
         </div>
@@ -68,12 +79,27 @@
           <p
             style="overflow: auto"
             class="text-sm text-slate-100 tracking-wide max-h-60"
+            [attr.contenteditable]="isEditMode ? '' : null"
           >
-            {{ item.Description }}
+            {{ item.Description}}
           </p>
         </div>
       </div>
-      <div class="flex flex-row justify-end items-end w-full">
+      <div class="flex flex-row justify-between items-center w-full">
+        <button
+          *ngIf="!isEditMode"
+          class="ml-1 px-4 py-1 bg-cyan-800 hover:bg-cyan-900 text-white rounded-3xl"
+          (click)="toggleEditMode()"
+        >
+          EDIT
+        </button>
+        <button
+          *ngIf="isEditMode"
+          class="ml-1 px-4 py-1 bg-cyan-800 hover:bg-cyan-900 text-white rounded-3xl"
+          (click)="updateData(item.id)"
+        >
+          UPDATE
+        </button>
         <h1 class="text-base font-extralight tracking-wider text-white">
           By {{ item.authorName | uppercase }}
         </h1>

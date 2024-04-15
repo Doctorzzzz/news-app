@@ -14,7 +14,7 @@ import { Auth } from '@angular/fire/auth';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, ReactiveFormsModule,NgIf],
+  imports: [RouterLink, RouterOutlet, ReactiveFormsModule, NgIf],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css',
 })
@@ -22,10 +22,14 @@ import { Auth } from '@angular/fire/auth';
   providedIn: 'root',
 })
 export class LoginComponent implements OnInit {
-  constructor(private router: Router, private authService: AuthService,private firebaseAuth:Auth) {}
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private firebaseAuth: Auth
+  ) {}
   form!: FormGroup;
   errorMessage: string | null = null;
-  
+
   onSubmit() {
     const rawForm = this.form.getRawValue();
     this.authService
@@ -36,18 +40,13 @@ export class LoginComponent implements OnInit {
       )
       .subscribe({
         next: () => {
-          console.log("successfully logged in");
-          
-          
-          
-          
-         
+          console.log('successfully logged in');
+
           this.router.navigateByUrl('/');
         },
         error: (err) => {
           this.errorMessage = err.code;
           console.log(err);
-          
         },
       });
   }

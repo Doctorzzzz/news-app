@@ -1,1 +1,97 @@
-<p>Home works</p>
+<div style="background-color: #292a2d" class="min-h-screen">
+    <div class="container py-24">
+      <div
+        *ngFor="let item of news"
+        style="background-color: #1f1f1f"
+        class="flex flex-col text-yellow-50 items-start w-1/2 min-h-96 px-6 py-3 border-0 shadow-md rounded-2xl ml-40 mb-10"
+      >
+        <div class="flex flex-row justify-between w-full">
+          <div class="flex">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-5"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="m12.75 15 3-3m0 0-3-3m3 3h-7.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
+              />
+            </svg>
+            <h1
+              id="header"
+            
+              class="text-sm font-bold tracking-wider text-white"
+             
+            >
+              {{ item.TypeOfNews | uppercase }}
+            </h1>
+          </div>
+          <div>{{ item.dateTimeCreated.toDate() | date }}</div>
+        </div>
+        <div class="flex flex-row py-6">
+          <div class="flex flex-col min-w-72 max-w-72">
+            <img
+              class="border-0 rounded-xl w-64 h-52"
+              src="{{ item.imagePath }}"
+              alt="some image"
+            />
+            <div class="flex flex-row">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
+                />
+              </svg>
+              <h1
+               
+                class="mb-6 text-sm font-bold tracking-wider text-white"
+              >
+                {{ item.CountryOfOrigin | uppercase }}
+              </h1>
+            </div>
+  
+            <h1
+           
+              class="text-slate-50 font-normal text-lg"
+            >
+              {{ item.Title }}
+            </h1>
+          </div>
+  
+          <div class="flex flex-col">
+            <p
+              style="overflow: auto"
+              class="text-sm text-slate-100 tracking-wide max-h-60"
+             
+            >
+              {{ item.Description}}
+            </p>
+          </div>
+        </div>
+        <div class="flex flex-row justify-between items-center w-full">
+          
+          <h1 class="text-base font-extralight tracking-wider text-white">
+            By {{ item.authorName | uppercase }}
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  

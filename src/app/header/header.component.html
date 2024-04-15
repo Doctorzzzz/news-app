@@ -21,7 +21,7 @@
       *ngIf="userLoggedIn"
       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
     >
-      Welcome {{ firebaseAuth.currentUser?.displayName }} 
+      Welcome {{ firebaseAuth.currentUser?.displayName | uppercase}} 
     </p>
     <!-- <a
       class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
@@ -34,6 +34,12 @@
       routerLink="/add-news"
       rel="noopener noreferrer"
       >Add News</a
+    >
+    <a
+      class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-2 py-1 text-sm font-medium"
+      routerLink="/home"
+      rel="noopener noreferrer"
+      >My News</a
     >
   </div>
   <div>
