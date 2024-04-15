@@ -1,6 +1,6 @@
 import { DatePipe, NgFor, UpperCasePipe } from '@angular/common';
 import { Component, OnInit,  inject } from '@angular/core';
-import { Firestore, collection, getDocs } from '@angular/fire/firestore';
+import { Firestore, collection, doc, getDocs } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
 
 
@@ -18,11 +18,12 @@ export class NewsComponent implements OnInit {
   constructor(){}
 
   
-
-   async ngOnInit(): Promise<void> {
-    const querySnapshot = await getDocs(collection(this.firestore, 'news'));
-    this.news = querySnapshot.docs.map(doc => doc.data());
-    console.log(this.news);
-    
-   }
+async ngOnInit(): Promise<void> {
+ const querySnapshot = await getDocs(collection(this.firestore, 'news'));
+ this.news = querySnapshot.docs.map((doc) => ({
+    ...doc.data(), // Spread the document data
+    UID: doc.id // Add the document ID with the name UID
+ }));
+ console.log(this.news);
+}
 }
