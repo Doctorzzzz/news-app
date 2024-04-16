@@ -28,6 +28,10 @@ export const routes: Routes = [
         component:NewsComponent ,
       },
       {
+        path: 'news/:id',
+        component:NewsComponent ,
+      },
+      {
         path: 'add-news',
         component:AddNewsComponent ,
       },

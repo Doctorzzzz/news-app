@@ -43,6 +43,8 @@ export class AddNewsComponent implements OnInit {
             Description: rawForm.description,
             CountryOfOrigin: rawForm.country,
             TypeOfNews: rawForm.newstype,
+            dateTimeCreated:new Date(),
+            authorName: this.firebaseAuth.currentUser?.displayName,
           }
         );
         const dbInstance1 = addDoc(

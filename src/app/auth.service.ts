@@ -6,23 +6,25 @@ import {
   signInWithEmailAndPassword,
   updateProfile,
 } from '@angular/fire/auth';
-import {  Firestore, addDoc, collection, getDocs, query, where } from '@angular/fire/firestore';
+import {
+  Firestore,
+  addDoc,
+  collection,
+  getDocs,
+  query,
+  where,
+} from '@angular/fire/firestore';
 
-import { Observable, from,  } from 'rxjs';
+import { Observable, from } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService implements OnInit {
-  
   firebaseAuth = inject(Auth);
   firestore = inject(Firestore);
-  
-  constructor(){
-   
-   
-    
-  }
+
+  constructor() {}
 
   register(email: string, username: string, password: string): Observable<any> {
     const promise = createUserWithEmailAndPassword(
@@ -31,8 +33,6 @@ export class AuthService implements OnInit {
       password
     ).then((response) => {
       updateProfile(response.user, { displayName: username });
-      
-      
     });
 
     return from(promise);
@@ -69,28 +69,19 @@ export class AuthService implements OnInit {
       });
   }
 
-  
-  async  getUserIdByUsername(username: any): Promise<string | null> {
+  async getUserIdByUsername(username: any): Promise<string | null> {
     const usersCollectionRef = collection(this.firestore, 'users');
     const q = query(usersCollectionRef, where('Name', '==', username));
-   
+
     const querySnapshot = await getDocs(q);
     if (!querySnapshot.empty) {
-       // Assuming you want the first document's ID
-       
-       return querySnapshot.docs[0].id;
+      // Assuming you want the first document's ID
+
+      return querySnapshot.docs[0].id;
     } else {
-       return null;
+      return null;
     }
-   }
-
-
-  
-   
-
-  ngOnInit(): void {
-    
-   
   }
 
+  ngOnInit(): void {}
 }

@@ -9,7 +9,7 @@ import {
 } from '@angular/fire/firestore';
 import { FormGroup } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 
 @Component({
@@ -23,8 +23,9 @@ export class NewsComponent implements OnInit {
   news: any[] | undefined;
   form!: FormGroup;
   firestore = inject(Firestore);
+  index:number=0;
 
-  constructor(private auth: AuthService, private router: Router) {}
+  constructor(private auth: AuthService, private router: Router,private route: ActivatedRoute) {}
 
   isEditMode: boolean = false;
   toggleEditMode() {
@@ -61,5 +62,11 @@ export class NewsComponent implements OnInit {
 
   async ngOnInit(): Promise<void> {
     await this.fetchNews();
-  }
-}
+    this.route.params.subscribe((params: Params) => {
+      if (params['id']) {
+        console.log(params['id']);
+  
+        this.index = params['id'];}
+  })
+
+}}

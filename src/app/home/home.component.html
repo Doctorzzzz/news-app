@@ -86,7 +86,13 @@
           </div>
         </div>
         <div class="flex flex-row justify-between items-center w-full">
-          
+            <button
+            
+            class="ml-1 px-4 py-1 bg-cyan-800 hover:bg-cyan-900 text-white rounded-3xl"
+            (click)="deleteData(item.id)"
+          >
+            Delete
+          </button>
           <h1 class="text-base font-extralight tracking-wider text-white">
             By {{ item.authorName | uppercase }}
           </h1>
