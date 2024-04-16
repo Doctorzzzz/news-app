@@ -7,6 +7,8 @@ import {
   deleteDoc,
   doc,
   getDocs,
+  query,
+  where,
 } from '@angular/fire/firestore';
 import { Router, RouterLink, RouterOutlet } from '@angular/router';
 import { AuthService } from '../auth.service';
@@ -27,11 +29,7 @@ export class HomeComponent implements OnInit {
   currentUserUid: string | undefined;
 
   deleteData(id: string) {
-    const docInstance = doc(
-      this.firestore,
-      `users/${this.currentUserUid}/news`,
-      id
-    );
+    const docInstance = doc(this.firestore, `news`, id);
     deleteDoc(docInstance)
       .then(() => {
         console.log('Data Deleted Successfully');
@@ -44,19 +42,17 @@ export class HomeComponent implements OnInit {
   }
 
   async fetchNews(): Promise<void> {
-    this.auth
-      .getUserIdByUsername(this.firebaseAuth.currentUser?.displayName)
-      .then(async (res) => {
-        this.currentUserUid = res ?? undefined;
-        const querySnapshot = await getDocs(
-          collection(this.firestore, `users/${this.currentUserUid}/news`)
-        );
-        this.news = querySnapshot.docs.map((doc) => ({
-          ...doc.data(), // Spread the document data
-          id: doc.id, // Add the document ID with the name UID
-        }));
-        console.log(this.news);
-      });
+    const newsCollectionRef = collection(this.firestore, 'news');
+    const q = query(
+      newsCollectionRef,
+      where('authorName', '==', this.firebaseAuth.currentUser?.displayName)
+    );
+    const querySnapshot = await getDocs(q);
+    this.news = querySnapshot.docs.map((doc) => ({
+      ...doc.data(), // Spread the document data
+      id: doc.id, // Add the document ID with the name UID
+    }));
+    console.log(this.news);
   }
 
   async ngOnInit(): Promise<void> {
