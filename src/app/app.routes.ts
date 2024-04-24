@@ -4,6 +4,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
 import { HomeComponent } from './home/home.component';
 import { NewsComponent } from './news/news.component';
 import { AddNewsComponent } from './add-news/add-news.component';
+import { PoliticsNewsComponent } from './politics-news/politics-news.component';
 
 export const routes: Routes = [
     {
@@ -34,5 +35,9 @@ export const routes: Routes = [
       {
         path: 'add-news',
         component:AddNewsComponent ,
+      },
+      {
+        path: 'politics',
+        component:PoliticsNewsComponent ,
       },
 ];

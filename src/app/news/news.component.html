@@ -26,6 +26,7 @@
             [attr.contenteditable]="isEditMode ? '' : null"
             class="text-sm font-bold tracking-wider text-white"
             [class.edit-mode]="isEditMode"
+            
           >
             {{ item.TypeOfNews | uppercase }}
           </h1>
@@ -59,27 +60,30 @@
                 d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z"
               />
             </svg>
-            <h1
+            <h1 id="countryOfOrigin"
               [attr.contenteditable]="isEditMode ? '' : null"
               class="mb-6 text-sm font-bold tracking-wider text-white"
+              [class.edit-mode]="isEditMode"
             >
               {{ item.CountryOfOrigin | uppercase }}
             </h1>
           </div>
 
-          <h1
+          <h1 id="title"
             [attr.contenteditable]="isEditMode ? '' : null"
             class="text-slate-50 font-normal text-lg"
+            [class.edit-mode]="isEditMode"
           >
             {{ item.Title }}
           </h1>
         </div>
 
         <div class="flex flex-col">
-          <p
+          <p id="description"
             style="overflow: auto"
-            class="text-sm text-slate-100 tracking-wide max-h-60"
+            class=" flex flex-wrap text-sm text-slate-100 tracking-wide max-h-60"
             [attr.contenteditable]="isEditMode ? '' : null"
+            [class.edit-mode]="isEditMode"
           >
             {{ item.Description}}
           </p>
@@ -89,7 +93,8 @@
         <button
           *ngIf="!isEditMode"
           class="ml-1 px-4 py-1 bg-cyan-800 hover:bg-cyan-900 text-white rounded-3xl"
-          (click)="toggleEditMode()"
+         
+          routerLink="/news/{{item.id}}"
         >
           EDIT
         </button>
@@ -101,7 +106,7 @@
           UPDATE
         </button>
         <h1 class="text-base font-extralight tracking-wider text-white">
-          By {{ item.authorName | uppercase }}
+          Created by {{ item.authorName | uppercase }}
         </h1>
       </div>
     </div>

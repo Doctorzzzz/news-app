@@ -21,6 +21,8 @@ export class AddNewsComponent implements OnInit {
   firestore = inject(Firestore);
   firebaseAuth = inject(Auth);
   currentUserUid: string | undefined;
+  selectedNewsType = 'Select Topic';
+  selectedCountry = 'Select a country';
 
   constructor(private auth: AuthService,private router:Router) {}
   form!: FormGroup;

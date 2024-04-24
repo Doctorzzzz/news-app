@@ -56,8 +56,6 @@ export class HomeComponent implements OnInit {
   }
 
   async ngOnInit(): Promise<void> {
-    setTimeout(() => {
-      this.fetchNews();
-    }, 1000);
+    this.fetchNews();
   }
 }

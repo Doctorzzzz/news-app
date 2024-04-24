@@ -5,17 +5,19 @@ import {
   collection,
   doc,
   getDocs,
+  query,
   updateDoc,
+  where,
 } from '@angular/fire/firestore';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormsModule } from '@angular/forms';
 import { AuthService } from '../auth.service';
-import { ActivatedRoute, Params, Router } from '@angular/router';
-
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-news',
   standalone: true,
-  imports: [NgFor, DatePipe, UpperCasePipe, NgIf],
+  imports: [NgFor, DatePipe, UpperCasePipe, NgIf, RouterLink, FormsModule],
   templateUrl: './news.component.html',
   styleUrl: './news.component.css',
 })
@@ -23,20 +25,47 @@ export class NewsComponent implements OnInit {
   news: any[] | undefined;
   form!: FormGroup;
   firestore = inject(Firestore);
-  index:number=0;
+  index: string | null | undefined;
 
-  constructor(private auth: AuthService, private router: Router,private route: ActivatedRoute) {}
+  Title: string | null | undefined;
+  CountryOfOrigin: string | undefined;
+  Description: string | undefined;
+  TypeOfNews: string | undefined;
+
+  constructor(
+    private auth: AuthService,
+    private router: Router,
+    private route: ActivatedRoute
+  ) {}
 
   isEditMode: boolean = false;
-  toggleEditMode() {
-    this.isEditMode = !this.isEditMode;
-    alert('You Can Edit the desired Fields');
-  }
+
+  // toggleEditMode() {
+  //   setTimeout(() => {
+  //     this.isEditMode = !this.isEditMode;
+
+  //   this.index = this.route.snapshot.paramMap.get('id');
+  //   console.log(this.index);
+  //   console.log(this.isEditMode);
+
+  //   this.fetchNews();
+  //   alert('You Can Edit the desired Fields');
+  //   }, 50);
+
+  // }
 
   updateData(id: string) {
+    this.Title = document.getElementById('title')?.innerText;
+    this.CountryOfOrigin =
+      document.getElementById('countryOfOrigin')?.innerText;
+    this.Description = document.getElementById('description')?.innerText;
+    this.TypeOfNews = document.getElementById('header')?.innerText;
     const docInstance = doc(this.firestore, 'news', id);
     const updateData = {
-      Title: 'vinod saini',
+      Title: this.Title,
+      Description: this.Description,
+      CountryOfOrigin: this.CountryOfOrigin,
+      TypeOfNews: this.TypeOfNews,
     };
     updateDoc(docInstance, updateData)
       .then(() => {
@@ -52,21 +81,31 @@ export class NewsComponent implements OnInit {
       });
   }
   async fetchNews(): Promise<void> {
-    const querySnapshot = await getDocs(collection(this.firestore, 'news'));
-    this.news = querySnapshot.docs.map((doc) => ({
-      ...doc.data(), // Spread the document data
-      id: doc.id, // Add the document ID with the name UID
-    }));
+    if (this.index) {
+      const querySnapshot = await getDocs(collection(this.firestore, 'news'));
+      this.news = querySnapshot.docs
+        .filter((doc) => {
+          return doc.id === this.index;
+        })
+        .map((doc) => {
+          return { ...doc.data(), id: doc.id };
+        });
+      this.isEditMode = !this.isEditMode;
+    } else {
+      const querySnapshot = await getDocs(collection(this.firestore, 'news'));
+      this.news = querySnapshot.docs.map((doc) => ({
+        ...doc.data(),
+        id: doc.id,
+      }));
+    }
+
     console.log(this.news);
   }
 
   async ngOnInit(): Promise<void> {
-    await this.fetchNews();
-    this.route.params.subscribe((params: Params) => {
-      if (params['id']) {
-        console.log(params['id']);
-  
-        this.index = params['id'];}
-  })
+    this.index = this.route.snapshot.paramMap.get('id');
+    console.log(this.index);
 
-}}
+    await this.fetchNews();
+  }
+}
